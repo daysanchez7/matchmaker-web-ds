@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!--
+    Author: Dayanna Sanchez CPSC-20000
+    Project: MatchmakerWeb
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Matchmaker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>&#10084; Dayanna Sanchez's Matchmaker 2.0 &#10084;</h1>
+<h2>In Search for Day's True Love</h2>
+<p class="p1">Cupidsoft, Inc.</p>
+
+<h3>Please read the intructions below!</h3>
+<p class="p2"> Hello, my name is Dayanna Sanchez!
+The five questions you see below that you will be 
+responding to on a scale from <b>one</b> through <b>five</b>
+(<b>one indicating strongly disagree</b> and <b>five indicating 
+strongly disagree</b>) is to determine if you’re my true 
+love! Once you have completed the questions, I will 
+then compare your answers to my ideal “true love” 
+answers. Therefore, if your score is <b>exact</b> or <b>close</b> 
+to my “true love” answers, you’ll definitely be my 
+soulmate.</p>
+
+<label class="l1">Running is one of the greatest sports!</label><br />
+    <select id="Question1">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+
+    <br /><br />
+
+    <label class="l2">Vanilla milkshakes are delicious!</label><br />
+    <select id="Question2">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+
+    <br /><br />
+
+    <label class="l3">Athletics comes first then academics!</label><br />
+    <select id="Question3">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+
+    <br /><br />
+
+    <label class="l4">The Cubs are better than the Soxs!</label><br />
+    <select id="Question4">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+
+    <br /><br />
+
+    <label class="l5">Summer nights are the finest nights!</label><br />
+    <select id="Question5">
+        <option value="5">Strongly Agree</option>
+        <option value="4">Agree</option>
+        <option value="3">Neutral</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+
+    <br /><br /><br />
+    <button onclick="calculateCompatibility()">Calculate Compatibility</button>
+    <p id="compatibility"></p>
+   
+    
+
+<script>
+console.log("Day's Matchmaker Web");
+
+function calculateCompatibility() {
+    console.log("calculateCompatibility()");
+
+    const DESIRED_RESPONSE = [
+    5, /* strongly agree */ 
+    5, /* strongly agree */
+    1, /* strongly disagree */ 
+    4, /* agree */ 
+    5,  /* strongly agree */ 
+    ]
+
+    const MAX_SCORE = 25;
+
+    let question1Response = document.getElementById("Question1").selectedOptions[0].value;
+    let question2Response = document.getElementById("Question2").selectedOptions[0].value;
+    let question3Response = document.getElementById("Question3").selectedOptions[0].value;
+    let question4Response = document.getElementById("Question4").selectedOptions[0].value;
+    let question5Response = document.getElementById("Question5").selectedOptions[0].value;
+
+    console.log("Question 1 Answers:");
+    console.log(document.getElementById("Question1").selectedOptions[0].text);
+    console.log(document.getElementById("Question1").selectedOptions[0].value);
+    console.log(question1Response);
+
+    console.log("Question 2 Answers:");
+    console.log(document.getElementById("Question2").selectedOptions[0].text);
+    console.log(document.getElementById("Question2").selectedOptions[0].value);
+    console.log(question2Response);
+
+    console.log("Question 3 Answers:");
+    console.log(document.getElementById("Question3").selectedOptions[0].text);
+    console.log(document.getElementById("Question3").selectedOptions[0].value);
+    console.log(question2Response);
+
+    console.log("Question 4 Answers:");
+    console.log(document.getElementById("Question4").selectedOptions[0].text);
+    console.log(document.getElementById("Question4").selectedOptions[0].value);
+    console.log(question2Response);
+
+    console.log("Question 5 Answers:");
+    console.log(document.getElementById("Question5").selectedOptions[0].text);
+    console.log(document.getElementById("Question5").selectedOptions[0].value);
+    console.log(question2Response);
+
+    let question1Compatibility = 5 - Math.abs(question1Response - DESIRED_RESPONSE[0]);
+    let question2Compatibility = 5 - Math.abs(question2Response - DESIRED_RESPONSE[1]);
+    let question3Compatibility = 5 - Math.abs(question3Response - DESIRED_RESPONSE[2]);
+    let question4Compatibility = 5 - Math.abs(question4Response - DESIRED_RESPONSE[3]);
+    let question5Compatibility = 5 - Math.abs(question5Response - DESIRED_RESPONSE[4]);
+        
+    console.log("C1="+question1Compatibility);
+    console.log("C2="+question2Compatibility);
+    console.log("C3="+question3Compatibility);
+    console.log("C4="+question4Compatibility);
+    console.log("C5="+question5Compatibility);
+
+    let totalCompatibility = question1Compatibility + question2Compatibility + question3Compatibility + question4Compatibility + question5Compatibility;
+    console.log("totalCompatibility"+ totalCompatibility);
+
+    totalCompatibility *= 100 / MAX_SCORE;
+    totalCompatibility = Math.round(totalCompatibility);
+    console.log("totalc="+ totalCompatibility);
+
+    document.getElementById("compatibility").innerHTML = "Your compatibility is... " + totalCompatibility;
+
+    if (totalCompatibility >= 80) {
+        alert("You got a score of 80% or higher! Therefore, we are soulmates! :)"); 
+    } else if (totalCompatibility >= 70) {
+        alert("You got a score greater than or equal to 70%! Therefore, we can try and give it a shot!");
+    } else if (totalCompatibility >= 50) {
+        alert("You got a score greater than or equal to 50%! Therefore, we should be friends!");
+    } else {
+        alert("Your score was too low...so not a chance. I'm sorry! :(");
+    }
+
+}
+
+
+</script>
+
+</body>
+
+</html>
